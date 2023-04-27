@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  		<title>LTIM-FMM</title>
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="css/fontAwesome.css">
+        <link rel="stylesheet" href="css/light-box.css">
+        <link rel="stylesheet" href="css/templatemo-style.css">
+
+        <link href="https://fonts.googleapis.com/css?family=Kanit:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+        <link rel="icon" href="logo.png" type="image/x-icon"/>
+        <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+        <style>
+           @import url('https: //fonts.googleapis.com/css?family=Poppins: 300,400,500,600,700,800,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rancho&display=swap');
+        *, *:before, *:after {
+          box-sizing: border-box;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+        }
+        
+        body {
+          background: linear-gradient(to right, black 0%, black 100%);
+          font-size: 12px;
+        }
+        
+        body, button, input {
+          font-family: 'Montserrat', sans-serif;
+          font-weight: 700;
+          letter-spacing: 1.4px;
+        }
+        
+        .background {
+          display: flex;
+          min-height: 100vh;
+        }
+        
+        .container {
+          flex: 0 1 700px;
+          margin: auto;
+          padding: 10px;
+        }
+        
+        .screen {
+          position: relative;
+          background: #3e3e3e;
+          border-radius: 15px;
+        }
+        
+        .screen:after {
+          content: '';
+          display: block;
+          position: absolute;
+          top: 0;
+          left: 20px;
+          right: 20px;
+          bottom: 0;
+          border-radius: 15px;
+          box-shadow: 0 20px 40px rgba(0, 0, 0, .4);
+          z-index: -1;
+        }
+        
+        .screen-header {
+          display: flex;
+          align-items: center;
+          padding: 10px 20px;
+          background: #4d4d4f;
+          border-top-left-radius: 15px;
+          border-top-right-radius: 15px;
+        }
+        
+        .screen-header-left {
+          margin-right: auto;
+        }
+        
+        .screen-header-button {
+          display: inline-block;
+          width: 8px;
+          height: 8px;
+          margin-right: 3px;
+          border-radius: 8px;
+          background: white;
+        }
+        
+        .screen-header-button.close {
+          background: #ed1c6f;
+        }
+        
+        .screen-header-button.maximize {
+          background: #e8e925;
+        }
+        
+        .screen-header-button.minimize {
+          background: #74c54f;
+        }
+        
+        .screen-header-right {
+          display: flex;
+        }
+        
+        .screen-header-ellipsis {
+          width: 3px;
+          height: 3px;
+          margin-left: 2px;
+          border-radius: 8px;
+          background: #999;
+        }
+        
+        .screen-body {
+          display: flex;
+        }
+        
+        .screen-body-item {
+          flex: 1;
+          padding: 50px;
+        }
+        
+        .screen-body-item.left {
+          display: flex;
+          flex-direction: column;
+        }
+        
+        .app-title {
+          display: flex;
+          flex-direction: column;
+          position: relative;
+          color: #ea1d6f;
+          font-size: 26px;
+        }
+        
+        .app-title:after {
+          content: '';
+          display: block;
+          position: absolute;
+          left: 0;
+          bottom: -10px;
+          width: 25px;
+          height: 4px;
+          background: #ea1d6f;
+        }
+        
+        .app-contact {
+          margin-top: auto;
+          font-size: 8px;
+          color: #888;
+        }
+        
+        .app-form-group {
+          margin-bottom: 15px;
+        }
+        
+        .app-form-group.message {
+          margin-top: 40px;
+        }
+        
+        .app-form-group.buttons {
+          margin-bottom: 0;
+          text-align: right;
+        }
+        
+        .app-form-control {
+          width: 100%;
+          padding: 10px 0;
+          background: none;
+          border: none;
+          border-bottom: 1px solid #666;
+          color: #ddd;
+          font-size: 14px;
+          text-transform: uppercase;
+          outline: none;
+          transition: border-color .2s;
+        }
+        
+        .app-form-control::placeholder {
+          color: #666;
+        }
+        
+        .app-form-control:focus {
+          border-bottom-color: #ddd;
+        }
+        
+        .app-form-button2 {
+          background: none;
+          border: none;
+          color: BLACK;
+          font-size: 14px;
+          cursor: pointer;
+          outline: none;
+        }
+        
+        .app-form-button2:hover {
+          color: #b9134f;
+        }
+        .app-form-button1 {
+          background: none;
+          border: none;
+          color: BLACK;
+          font-size: 14px;
+          cursor: pointer;
+          outline: none;
+        }
+        
+        .app-form-button1:hover {
+          color: green;
+        }
+        .credits {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin-top: 20px;
+          color: #ffa4bd;
+          font-family: 'Roboto Condensed', sans-serif;
+          font-size: 16px;
+          font-weight: normal;
+        }
+        
+        .credits-link {
+          display: flex;
+          align-items: center;
+          color: #fff;
+          font-weight: bold;
+          text-decoration: none;
+        }
+        
+        .dribbble {
+          width: 20px;
+          height: 20px;
+          margin: 0 5px;
+        }
+        
+        @media screen and (max-width: 520px) {
+          .screen-body {
+            flex-direction: column;
+          }
+        
+          .screen-body-item.left {
+            margin-bottom: 30px;
+          }
+        
+          .app-title {
+            flex-direction: row;
+          }
+        
+          .app-title span {
+            margin-right: 12px;
+          }
+        
+          .app-title:after {
+            display: none;
+          }
+        }
+        
+        @media screen and (max-width: 600px) {
+          .screen-body {
+            padding: 40px;
+          }
+        
+          .screen-body-item {
+            padding: 0;
+          }
+        }
+        
+           
+            #myVideo {
+                filter:opacity(100%);
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: -1;
+}
+#imge{
+    position: absolute;
+	top: 8px;
+	left: 10px;
+	
+	pointer-events: none;
+width: 70px;
+height: 70px;
+
+}
+#coding{
+	
+	position: relative;
+	width: 100%;
+	min-height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center; 
+}
+#coding #text{
+	position: absolute;
+	color:white ;
+	font-size: 9vw;
+	text-align: center;
+	line-height:0.55em ;
+	font-family: 'Rancho',cursive;
+	transform: translatey(-10%);
+
+}
+#coding #text span{
+	font-size:0.20em ;
+	letter-spacing: 2px;
+	font-weight: 400;
+		font-family: 'Poppins',sans-serif ;
+
+}
+#btn{
+text-decoration: none;
+	display: inline-block;
+	padding: 8px 25px;
+	background: #35383e;
+	color:white ;
+	font-size: 1.2em;
+	font-weight: 500;
+	letter-spacing: 2px;
+	border-radius: 40px;
+	transform: translatey(200px);
+}
+button{
+	padding: 0;
+border: none;
+background: none;
+}
+#btn:hover {
+  background-color: #33a3ee;
+  color: white;
+  cursor: pointer
+}
+
+
+        </style>
+    </head>
+
+<body>
+
+    <nav>
+        <div class="logo">
+            <a href="index.html"><img src="logo.png" id="imge"></a>
+        </div>
+        <div class="menu-icon">
+        <span></span>
+      </div>
+    </nav>
+
+    <div id="video-container">
+        <div class="video-overlay"></div>
+        <div class="video-content">
+            <div class="inner">
+                <div id="coding">
+                    <h2 id="text"><span><b>Laboratoire de recherche </b> </span><br/>LABTIM-FMM</h2>
+                    <h3 id="text" style="margin-top:500px;"><span><b>Ce site est en cours de maintenance  </span></h3><br/></h3>
+                  
+                    <a href="#" id="btn" onclick="log()" style="text-decoration: none;">S'inscrire</a>
+                    
+                </div>
+                
+                 
+            </div>
+        </div>
+        <video autoplay="" loop="" muted id="myVideo">
+        	<source src="intro.mp4" type="video/mp4" />
+        </video>
+    </div>
+    
+
+   
+    <footer>
+        <div class="container-fluid">
+          <div class="background">
+            <div class="container">
+              <div class="screen">
+                <div class="screen-header">
+                  <div class="screen-header-left">
+                    <div class="screen-header-button close"></div>
+                    <div class="screen-header-button maximize"></div>
+                    <div class="screen-header-button minimize"></div>
+                  </div>
+                  <div class="screen-header-right">
+                    <div class="screen-header-ellipsis"></div>
+                    <div class="screen-header-ellipsis"></div>
+                    <div class="screen-header-ellipsis"></div>
+                  </div>
+                </div>
+                <div class="screen-body">
+                  <div class="screen-body-item left">
+                    <div class="app-title">
+                      <span>Nous</span>
+                      <span>contacter</span>
+                    </div>
+                    <div class="app-contact">Crée par <b>Laboratoire de recherche</b> avec la direction du Pr. <b>Mohamed Hedi Bedoui</b> <br>INFO : +216 num</div>
+                  </div>
+                  <div class="screen-body-item">
+                    <div class="app-form">
+                      <div class="app-form-group">
+                        <input class="app-form-control" placeholder="NOM COMPLET" >
+                      </div>
+                      <div class="app-form-group">
+                        <input class="app-form-control" placeholder="EMAIL">
+                      </div>
+                      <div class="app-form-group">
+                        <input class="app-form-control" placeholder="CONTACT NO">
+                      </div>
+                      <div class="app-form-group message">
+                        <input class="app-form-control" placeholder="MESSAGE">
+                      </div>
+                      <div class="app-form-group buttons">
+                        <button class="app-form-button1">Envoyer</button>
+                        <button class="app-form-button2">Annuler</button>
+                        
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+          
+        </div>
+    </footer>
+
+
+      <!-- Modal button -->
+    <div class="popup-icon">
+      <button id="modBtn" class="modal-btn"><img src="img/contact-icon.png" alt=""></button>
+    </div>  
+
+    <!-- Modal -->
+    <div id="modal" class="modal">
+      <!-- Modal Content -->
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h3 class="header-title">Posez vos questions <em>ici</em></h3>
+          <div class="close-btn"><img src="img/close_contact.png" alt=""></div>    
+        </div>
+        <!-- Modal Body -->
+        <div class="modal-body">
+          <div class="col-md-6 col-md-offset-3">
+            <form id="contact" action="" method="post">
+                <div class="row">
+                    <div class="col-md-12">
+                      <fieldset>
+                        <input name="name" type="text" class="form-control" id="name" placeholder="Votre nom..." required="">
+                      </fieldset>
+                    </div>
+                    <div class="col-md-12">
+                      <fieldset>
+                        <input name="email" type="email" class="form-control" id="email" placeholder="Votre email..." required="">
+                      </fieldset>
+                    </div>
+                    <div class="col-md-12">
+                      <fieldset>
+                        <textarea name="message" rows="6" class="form-control" id="message" placeholder="Votre message..." required=""></textarea>
+                      </fieldset>
+                    </div>
+                    <div class="col-md-12">
+                      <fieldset>
+                        <button type="submit" id="form-submit" class="btn">Envoyer le message</button>
+                      </fieldset>
+                    </div>
+                </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+
+    <section class="overlay-menu">
+      <div class="container">
+        <div class="row">
+          <div class="main-menu">
+              <ul> <li style="--i:5;"><button name="home" onclick="Mf1()"  ><a href="#home" class="active" >Home</a></button></li>
+                <li style="--i:4;"><button name="home" onclick="Mf2()"  ><a href="#home" class="active" >FMM</a></button></li>
+                 
+                 
+                  <li style="--i:3;"><button name="web" onclick="Mf3()" ><a href="#web" >Espace chercheur</a></button></li>
+                  <li style="--i:2;"><button name="mobile" onclick="Mf4()" ><a href="#manip3" >Espace Etudiant</a></button></li>
+                  <li style="--i:1;"><button name="contact" onclick="Mf5()" ><a href="#contact">Contact</a></button></li></ul>
+              </ul>
+            
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
+
+    <script src="js/vendor/bootstrap.min.js"></script>
+    
+    <script src="js/plugins.js"></script>
+    <script src="js/main.js"></script>
+    <script type="text/javascript">
+        let text =document.getElementById('text');
+        let btn =document.getElementById('btn');
+        let header =document.getElementById('header');
+        window.addEventListener('scroll',function(){
+            let value =window.scrollY;
+            text.style.top=30 + value * -0.5 + '%';
+    
+        })
+    </script>
+
+   <script>
+    function log(){
+      window.open("file:///C:/Users/bilel/Videos/Project/login-form/login.html","_self")
+    }
+    function Mf1(){
+      window.open("file:///C:/Users/bilel/Videos/Project/index.html","_self");
+    }
+    function Mf2(){
+      window.open("");
+    }
+    function Mf3(){
+      window.open("","_self");
+    }
+    function Mf4(){
+      window.open("","_self");
+    }
+    function Mf5(){
+      window.open("file:///C:/Users/bilel/Videos/Project/contact-form/contact.html","_self");
+    }
+   </script> 
+</body>
+</html>
